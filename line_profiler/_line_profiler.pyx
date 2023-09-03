@@ -393,7 +393,7 @@ cdef class LineProfiler:
 @cython.boundscheck(False)
 @cython.wraparound(False)
 cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
-PyObject *arg):
+PyObject *arg) noexcept:
     """ 
     The PyEval_SetTrace() callback.
     """
