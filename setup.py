@@ -4,6 +4,7 @@ import sys
 import os
 import warnings
 import setuptools
+from torch.utils.cpp_extension import include_paths, library_paths
 
 
 def _choose_build_method():
@@ -227,6 +228,10 @@ if __name__ == '__main__':
                     sources=["line_profiler/_line_profiler.pyx", "line_profiler/timers.c", "line_profiler/unset_trace.c"],
                     language="c++",
                     define_macros=[("CYTHON_TRACE", (1 if os.getenv("DEV") == "true" else 0))],
+                    include_dirs=include_paths(),
+                    library_dirs=library_paths(),
+                    runtime_library_dirs=library_paths(),
+                    libraries=["c10_cuda"],
                 ),
                 compiler_directives={"language_level": 3, "infer_types": True, "linetrace": (True if os.getenv("DEV") == "true" else False)},
                 include_path=["line_profiler/python25.pxd"],

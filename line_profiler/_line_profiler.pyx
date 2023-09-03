@@ -78,7 +78,7 @@ cdef extern from "Python.h":
     cdef int PyTrace_C_EXCEPTION
     cdef int PyTrace_C_RETURN
 
-cdef extern from "timers.c":
+cdef extern from "torch.cpp":
     PY_LONG_LONG hpTimer()
     double hpTimerUnit()
 

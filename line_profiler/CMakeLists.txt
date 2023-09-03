@@ -14,6 +14,8 @@ list(APPEND sources
 )
 message(STATUS "[OURS] sources = ${sources}")
 
+find_package(Torch REQUIRED)
+
 # Create C++ library. Specify include dirs and link libs as normal
 add_library(${module_name} MODULE ${sources})
 target_include_directories(${module_name} PUBLIC
