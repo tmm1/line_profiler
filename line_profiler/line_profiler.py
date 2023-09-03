@@ -308,7 +308,7 @@ def show_func(filename, start_lineno, func_name, timings, unit,
 
     linenos = [t[0] for t in timings]
 
-    stream.write('Total time: %g s\n' % (total_time * unit))
+    stream.write('Total memory: %g GB\n' % (total_time * unit))
     if os.path.exists(filename) or is_ipython_kernel_cell(filename):
         stream.write(f'File: {filename}\n')
         stream.write(f'Function: {func_name} at line {start_lineno}\n')
@@ -354,6 +354,11 @@ def show_func(filename, start_lineno, func_name, timings, unit,
         if len(perhit_disp) > default_column_sizes['perhit']:
             perhit_disp = '%5.1g' % (float(time) * scalar / nhits)
 
+        if time == 0:
+            time_disp = ""
+            perhit_disp = ""
+            percent = ""
+
         nhits_disp = "%d" % nhits
         if len(nhits_disp) > default_column_sizes['hits']:
             nhits_disp = '%g' % nhits
@@ -376,7 +381,7 @@ def show_func(filename, start_lineno, func_name, timings, unit,
 
     linenos = range(start_lineno, start_lineno + len(sublines))
     empty = ('', '', '', '')
-    header = ('Line #', 'Hits', 'Time', 'Per Hit', '% Time', 'Line Contents')
+    header = ('Line #', 'Hits', 'Mem', 'Per Hit', '% Mem', 'Line Contents')
     header = template % header
     stream.write('\n')
     stream.write(header)
@@ -443,9 +448,9 @@ def show_text(stats, unit, output_unit=None, stream=None, stripzeros=False,
         stream = sys.stdout
 
     if output_unit is not None:
-        stream.write('Timer unit: %g s\n\n' % output_unit)
+        stream.write('Mem unit: %g bytes\n\n' % output_unit)
     else:
-        stream.write('Timer unit: %g s\n\n' % unit)
+        stream.write('Mem unit: %g bytes\n\n' % unit)
 
     if sort:
         # Order by ascending duration
