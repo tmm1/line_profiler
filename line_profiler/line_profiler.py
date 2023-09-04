@@ -161,7 +161,7 @@ class LineProfiler(CLineProfiler):
         with open(filename, 'wb') as f:
             pickle.dump(lstats, f, pickle.HIGHEST_PROTOCOL)
 
-    def print_stats(self, stream=None, output_unit=None, stripzeros=False,
+    def print_stats(self, stream=None, output_unit=None, stripzeros=True,
                     details=True, summarize=False, sort=False, rich=False):
         """ Show the gathered statistics.
         """
@@ -289,7 +289,7 @@ def show_func(filename, start_lineno, func_name, timings, unit,
     total_hits = sum(t[1] for t in timings)
     total_time = sum(t[2] for t in timings)
 
-    if stripzeros and total_hits == 0:
+    if stripzeros and total_time == 0:
         return
 
     if rich:
