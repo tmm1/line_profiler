@@ -303,12 +303,13 @@ def show_func(filename, start_lineno, func_name, timings, unit,
             rich = 0
 
     if output_unit is None:
-        output_unit = unit
-    scalar = unit / output_unit
+        scalar = unit
+    else:
+        scalar = unit / output_unit
 
     linenos = [t[0] for t in timings]
 
-    stream.write('Total memory: %g GB\n' % (total_time * unit))
+    stream.write('Total memory: %g MB\n' % (total_time * unit))
     if os.path.exists(filename) or is_ipython_kernel_cell(filename):
         stream.write(f'File: {filename}\n')
         stream.write(f'Function: {func_name} at line {start_lineno}\n')
