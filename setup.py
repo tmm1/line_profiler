@@ -233,7 +233,12 @@ if __name__ == '__main__':
                     runtime_library_dirs=library_paths(),
                     libraries=["c10_cuda"],
                 ),
-                compiler_directives={"language_level": 3, "infer_types": True, "linetrace": (True if os.getenv("DEV") == "true" else False)},
+                compiler_directives={
+                    "language_level": 3,
+                    "infer_types": True,
+                    "legacy_implicit_noexcept": True,
+                    "linetrace": (True if os.getenv("DEV") == "true" else False)
+                },
                 include_path=["line_profiler/python25.pxd"],
                 force=force,
                 nthreads=multiprocessing.cpu_count(),
@@ -295,6 +300,7 @@ if __name__ == '__main__':
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development',
     ]

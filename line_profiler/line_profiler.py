@@ -22,7 +22,7 @@ except ImportError as ex:
     )
 
 # NOTE: This needs to be in sync with ../kernprof.py and __init__.py
-__version__ = '4.1.0'
+__version__ = '4.1.2'
 
 
 def load_ipython_extension(ip):
@@ -293,6 +293,8 @@ def show_func(filename, start_lineno, func_name, timings, unit,
         return
 
     if rich:
+        # References:
+        # https://github.com/Textualize/rich/discussions/3076
         try:
             from rich.syntax import Syntax
             from rich.highlighter import ReprHighlighter
